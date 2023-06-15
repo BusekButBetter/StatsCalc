@@ -1,0 +1,125 @@
+StatsCalculator.java:
+--------------------
+import java.util.Arrays;
+public class StatsCalculator
+{
+  private double[] values;
+  private double[] sortedValues;
+  
+    public StatsCalculator(){
+        values = new double[20];
+        sortData();
+    }
+    
+    public StatsCalculator(double[] values){
+        this.values = values;
+        
+    }
+
+    public void sortData()//sorts the data from least to greatest //done 
+    {//done
+        sortedValues = values;
+        Arrays.sort(sortedValues);
+    }
+
+    public double calculateMax()//find the maximum value 
+    {//done
+        return sortedValues[values.length-1];
+    }
+
+    public double calculateMin()//finds the minimum value
+    {//done
+        return values[0];
+    }
+
+    public double calculateFirstQuartile()// finds the value of the first quartile. Please note that I exclude the median for calculating the quartiles
+    {//done
+        int firstQua = ((values.length)/4);
+        return sortedValues[firstQua];
+    }
+
+    public double calculateThirdQuartile()//finds the value of the third quartile. Please note that I exclude the median for calculating the quartiles
+    {//done
+        int thirdQua = ((values.length) * 3/4);
+        return sortedValues[thirdQua];
+    }
+
+    public double calculateMedian()//finds the value of the median //might be done, idk yet
+    {
+        double median = 0;
+        int temp = 0;
+        if(sortedValues.length % 2 != 0)
+        {temp = (sortedValues.length / 2);
+        median = sortedValues[temp];}
+        else
+        {temp = (sortedValues.length / 2);
+        median = (sortedValues[temp] + sortedValues[temp - 1]) /2.0;}
+        return median;
+    }  
+
+    public double calculateSum()//finds the sum of the array
+    {//done i think
+        double sum = 0;
+        for(int i = 0; i < values.length; i++)
+        {values[i] += sum;}
+        return sum; 
+    }
+
+    public double calculateMean()//find the mean of the array
+    {//done i think
+        double sum = 0;
+        double mean;
+        for(int i = 0; i < values.length; i++)
+        {values[i] += sum;}
+        mean = sum / values.length;
+        return mean;
+    }
+
+    public void print(){//prints the original array
+        System.out.print("Your data is: ");
+        for(double x: values){System.out.print(x + " ");}
+        System.out.println();
+    }
+
+    public void printSorted(){//prints the sorted array
+        sortData();
+        System.out.print("Your sorted data is: ");
+        for(double x:sortedValues){System.out.print(x + " ");}
+        System.out.println();
+    }
+  public void printFiveNumberSummary(){//prints the five number summary
+        System.out.println("The five number summary is: ");
+        System.out.println("\t" + "Minimum: " + calculateMin());
+        System.out.println("\t" + "First Quartile: " + calculateFirstQuartile());
+        System.out.println("\t" + "Median: " + calculateMedian());
+        System.out.println("\t" + "Third Quartile: " + calculateThirdQuartile());
+        System.out.println("\t" + "Maximum: " + calculateMax());
+    }
+  
+  
+}
+
+StatsCalculatorTester.java:
+--------------------------
+public class StatsCalculatorTester {
+
+    public static void main(String[] args){
+        double[] list = {10.0, 20.0, 5.0, 15.0, 25.0, 30.0, 8.0};
+        StatsCalculator statCal = new StatsCalculator(list);
+        statCal.print();
+        statCal.printSorted();
+        statCal.printFiveNumberSummary();
+        System.out.println();
+        
+        
+        //testing if default works
+        StatsCalculator statCal0 = new StatsCalculator();
+        statCal0.print();
+        statCal0.printSorted();
+        statCal0.printFiveNumberSummary();
+        System.out.println();
+        
+    }
+
+}
+
